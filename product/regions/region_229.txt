@@ -1,0 +1,1 @@
+   <path d="M879.5724626266181,299.45540667908193L879.5684179667317,299.4899039260932L879.5063390270816,299.48415438492464L879.5103824048313,299.44965713791345Z" class="country-shape" name="Ashmore and Cartier Is." stroke="#26232c" fill="#797979"onmouseover="handleRegion(this, event)" onmouseout="handleRegionMouseOut(this)" id="country_229"></path>   

@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Earthview</title>
+
+        <link rel="stylesheet" href="/styles.css">
+	</head>
+
+	<body>
+        <!-- <div class = "background"></div> -->
+
+        <!-- <div id="world"></div> -->
+        <!-- <div id="regionDetail"></div> -->
+
+        <div id = "canvasWrapper">
+            <div class = "navbar">
+                <div class = "navbar-left">
+                    <img class = "navbar-left-img" src = "/images/logo.png">
+                </div>
+
+                <div class = "navbar-center">
+                    <div class = "navbar-center-item">
+                        <span>News</span>
+                        <div class = "navbar-center-border"></div>
+                    </div>
+                    <div class = "navbar-center-item">
+                        <span>Inspiration</span>
+                    </div>
+                    <div class = "navbar-center-item">
+                        <span onclick = "moveToAction()">Action</span>
+                    </div>
+                </div>
+
+                <div class = "navbar-right"></div>
+            </div>
+
+            <canvas id="my_canvas"></canvas>
+            <div id = "myMap" class = "myMapClass">
+                <div class="choropleth-map">
+                    <svg id = "choropleth-map-svg">
+                        <g id = "g-map" class="map">
+
+                        </g>
+                    </svg>
+
+                    <!-- <div id="regionDetail">
+                        Đang ở vị trí x, y
+                    </div> -->
+                </div>
+            </div>
+
+            <div id = "CategoryButtonId" class = "category-button">
+                <div id = "pollution-button-id" 
+                     class = "pollution-button" 
+                     onmouseover="handleButtonHover(this)" 
+                     onmouseout = "handleButtonLeave(this)"
+                     onclick = "handleButtonClick(this.id)"
+                >
+                    Pollutions
+                </div>
+                <div id = "disaster-button-id" 
+                     class = "disaster-button" 
+                     onmouseover="handleButtonHover(this)" 
+                     onmouseout = "handleButtonLeave(this)"
+                     onclick = "handleButtonClick(this.id)"
+                >
+                    Disasters
+                </div>
+            </div>
+
+            <div id = "CategoryListId" class = "category-list">
+                <!-- <div class = "category-block">
+                    Air pollution
+                </div>   
+
+                <div class = "category-block">
+                    Water pollution
+                </div>
+
+                <div class = "category-block">
+                    Soil pollution
+                </div>             -->
+            </div>
+
+            <div id = "mapCoverId" class = "mapCover">
+            </div>
+            
+            <!-- <div class="wrapper">
+                <section id="section1">
+                    <a href = "#section3" class="arrow__btn left-arrow"><</a>
+
+                    <div class="item">
+                        <div class = "item-instruction">Click for more details</div>
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <div class="item">
+                        <div class = "item-instruction">Click for more details</div>
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <div class="item">
+                        <div class = "item-instruction">Click for more details</div>
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <div class="item">
+                        <div class = "item-instruction">Click for more details</div>
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <a href = "#section2" class="arrow__btn right-arrow">></a>
+                </section>
+
+                <section id="section2">
+                    <a href = "#section1" class="arrow__btn left-arrow"><</a>
+                    
+                    <div class="item">
+                        <div class = "item-instruction">Click for more details</div>
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <div class="item">
+                        <div class = "item-instruction">Click for more details</div>
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <div class="item">
+                        <div class = "item-instruction">Click for more details</div>
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <div class="item">
+                        <div class = "item-instruction">Click for more details</div>
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <a href = "#section3" class="arrow__btn right-arrow">></a>
+                </section>
+                
+                <section id="section3">
+                    <a href = "#section2" class="arrow__btn left-arrow"><</a>
+                    <div class="item">
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <div class="item">
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <div class="item">
+                        <img src="https://occ-0-1567-1123.1.nflxso.net/dnm/api/v5/rendition/412e4119fb212e3ca9f1add558e2e7fed42f8fb4/AAAABRvngexxF8H1-OzRWFSj6ddD-aB93tTBP9kMNz3cIVfuIfLEP1E_0saiNAwOtrM6xSOXvoiSCMsihWSkW0dq808-R7_lBnr6WHbjkKBX6I3sD0uCcS8kSPbRjEDdG8CeeVXEAEV6spQ.webp" alt="Describe Image">
+                    </div>
+
+                    <a href = "#section1" class="arrow__btn right-arrow">></a>
+                </section>
+            </div> -->
+
+            <!-- <div id = "menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div> -->
+
+
+            <!-- <div id="regionDetail">
+                Đang ở vị trí x, y
+            </div> -->
+        </div>
+
+        <div id="regionDetail"></div>
+
+        <!-- <div id = "menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div> -->
+
+        <!-- <div class="new"></div> -->
+
+
+        <div class = "information">
+            <div class = "information-content">
+                <h1>Is climate change a future problem?</h1>
+
+                <p>
+                    We’re already seeing the devastating effects of climate change on global 
+                    food supplies, increasing migration, conflict, disease and global instability, 
+                    and this will only get worse if we don’t act now. Man-made climate change is 
+                    the biggest environmental crisis of our time. It threatens the future of the planet 
+                    that we depend on for our survival and we're the last generation that can do 
+                    something about it.
+                </p>
+
+                <div class="information-footer">
+                    <div class = "circle circle-active"></div>
+                    <div class = "circle"></div>
+                    <div class = "circle"></div>
+                    <div class = "circle"></div>
+                </div>
+                
+            </div>
+        </div>
+
+
+        <div class = "featured-news">
+            <h1>Featured News</h1>
+            <div class = "featured-news-time">
+                <div id = "dateId" class = "featured-news-date">
+                    <!-- 11/3/2021 -->
+                </div>
+                <div class = "featured-news-icon">
+                    <!-- <div> -->
+                        <img src = "/images/calendar-icon.png">
+                        <input type="date" id="myDate" value="2014-02-09" onchange="handleDateChange()">
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div id="growContainer">
+                <div class="grow">
+                    <a href = "#">
+                        <img src = "/images/featured-news-1.jpg">
+                    </a>
+                </div>
+
+                <div class="grow">
+                    <a href = "#">
+                        <img src = "/images/featured-news-2.jpg">
+                    </a>
+                </div>
+
+                <div class="grow">
+                    <a href = "#">
+                        <img src = "/images/featured-news-3.jpg">
+                    </a>
+                </div>
+
+                <div class="grow">
+                    <a href = "#">
+                        <img src = "/images/featured-news-4.jpg">
+                    </a>
+                </div>
+
+                <div class="grow">
+                    <a href = "#">
+                        <img src = "/images/featured-news-5.jpg">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class = "future-problem">
+            <div class = "future-problem-left">
+                <img src = "/images/leaves.png">
+            </div>
+            <div class = "future-problem-right">
+                <h1>Is climate change a future problem?</h1>
+
+                <p>
+                    We’re already seeing the devastating effects of climate change on global 
+                    food supplies, increasing migration, conflict, disease and global instability, 
+                    and this will only get worse if we don’t act now. Man-made climate change is 
+                    the biggest environmental crisis of our time. It threatens the future of the planet 
+                    that we depend on for our survival and we're the last generation that can do 
+                    something about it.
+                </p>
+
+                <div class="future-problem-footer">
+                    <div class = "circle circle-active"></div>
+                    <div class = "circle"></div>
+                    <div class = "circle"></div>
+                    <div class = "circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class = future-problem-line></div> -->
+        <hr style = "margin: 0 10rem 1rem 10rem;">
+
+
+        <div class = "div-topic">
+            <h1>Topics</h1>
+
+            <div id="div-topic-container">
+                <div class="div-topic-item">
+                    <a href = "#">
+                        <img src = "/images/topic-1.png">
+                    </a>
+
+                    <div class = "div-topic-title">Pollutions & Natural Disasters</div>
+                </div>
+
+                <div class="div-topic-item">
+                    <a href = "#">
+                        <img src = "/images/topic-2.png">
+                    </a>
+
+                    <div class = "div-topic-title">Challenge in Business & Policy</div>
+                </div>
+
+                <div class="div-topic-item">
+                    <a href = "#">
+                        <img src = "/images/topic-3.png">
+                    </a>
+
+                    <div class = "div-topic-title">New Discovery</div>
+                </div>
+
+                <div class="div-topic-item">
+                    <a href = "#">
+                        <img src = "/images/topic-4.png">
+                    </a>
+
+                    <div class = "div-topic-title">Environmental Activism</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class = "future-activity">
+            <img src = "/images/activity-background.jpg">
+            <h1>A future where people and nature can thrive</h1>
+            <div class = "activity-button">Discover more</div>
+        </div>
+
+
+
+        <div class = "footer">
+            <div class = "footer-left">
+                <div class = "footer-left-logo">
+                    <img class = "footer-left-logo-img" src = "/images/logo.png">
+                </div>
+
+                <div class = "footer-left-body">
+                    The infographic highlights the high frequency of storms and floods – with the top two responsible for over 70% of the world’s natural disasters.
+                </div>  
+
+                <div class = "footer-left-icon">
+                    <img src = "/images/face.png">
+                    <img src = "/images/instagram.png">
+                    <img src = "/images/phone.png">
+                    <img src = "/images/twiter.png">
+                    <img src = "/images/youtube.png">
+                </div>
+            </div>
+            <div class = "footer-right">
+                <div class = "footer-right-navbar">
+                    <a href = "#">About us</a>
+                    <a href = "#">Information</a>
+                    <a href = "#">Inspiration</a>
+                    <a href = "#">Action</a>
+                </div>
+
+                <div class = "footer-right-contact">
+                    <h1>Join our team</h1>
+                    <input class = "footer-right-contact-input" placeholder = "Enter your email"></input>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+        <script src="https://threejs.org/build/three.js"></script>
+
+        <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+
+        <script src="https://s3-eu-west-2.amazonaws.com/bckld/lab/loading.js"></script>
+        
+        <script src="http://stemkoski.github.io/Three.js/js/Detector.js"></script>
+
+        <script src="http://stemkoski.github.io/Three.js/js/THREEx.KeyboardState.js"></script>
+
+        <!-- <script src="https://raw.githubusercontent.com/mrdoob/three.js/master/src/core/Raycaster.js"></script> -->
+
+        <script src="http://stemkoski.github.io/Three.js/js/THREEx.WindowResize.js"></script>
+        
+        <script>
+            function _convertLatLonToVec3(lat, lon) {
+                lat = lat * Math.PI / 180.0;
+                lon = -lon * Math.PI / 180.0;
+                return new THREE.Vector3(
+                    Math.cos(lat) * Math.cos(lon),
+                    Math.sin(lat),
+                    Math.cos(lat) * Math.sin(lon)
+                );
+            }
+
+            function InfoBox(city, radius, domElement) {
+                this._screenVector = new THREE.Vector3(0, 0, 0);
+
+                this.position = _convertLatLonToVec3(city.lat, city.lng).multiplyScalar(radius);
+
+                // create html overlay box
+                this.box = document.createElement('div');
+                this.box.innerHTML = city.name;
+                this.box.className = "hudLabel";
+
+                this.domElement = domElement;
+                this.domElement.appendChild(this.box);
+
+            }
+
+            InfoBox.prototype.update = function() {
+                this._screenVector.copy(this.position);
+                this._screenVector.project(camera);
+
+                var posx = Math.round((this._screenVector.x + 1) * this.domElement.offsetWidth / 2);
+                var posy = Math.round((1 - this._screenVector.y) * this.domElement.offsetHeight / 2);
+
+                var boundingRect = this.box.getBoundingClientRect();
+
+                // update the box overlays position
+                this.box.style.left = (posx - boundingRect.width) + 'px';
+                this.box.style.top = posy + 'px';
+            };
+
+
+            //--------------------------------
+            function Marker() {
+                THREE.Object3D.call(this);
+
+                var radius = 0.005;
+                var sphereRadius = 0.02;
+                var height = 0.05;
+
+                var material = new THREE.MeshPhongMaterial({
+                    color: 0xDC143C
+                });
+
+                var cone = new THREE.Mesh(new THREE.ConeBufferGeometry(radius, height, 8, 1, true), material);
+                cone.position.y = height * 0.5;
+                cone.rotation.x = Math.PI;
+
+                var sphere = new THREE.Mesh(new THREE.SphereBufferGeometry(sphereRadius, 16, 8), material);
+                sphere.position.y = height * 0.95 + sphereRadius;
+
+
+                this.add(cone, sphere);
+            }
+
+            Marker.prototype = Object.create(THREE.Object3D.prototype);
+
+
+
+            // ------ Earth object -------------------------------------------------
+
+            function Earth(radius, texture, bumpMap, bumpScale, specularMap, specular){
+                THREE.Object3D.call(this);
+
+                this.userData.radius = radius;
+
+                var earth = new THREE.Mesh(
+                    new THREE.SphereBufferGeometry(radius, 64.0, 48.0),
+                    new THREE.MeshPhongMaterial({
+                        map: texture,
+                        bumpMap: bumpMap,
+                        bumpScale: bumpScale,
+                        specularMap: specularMap,
+                        specular: specular
+                    })
+                );
+
+                // earth.position.y = 0.5;
+                // earth.position.y = 0.5;
+
+                // earth.position.y +=0.4;
+                // earth.position.x -=0.3;
+
+                this.add(earth);
+            }
+
+
+
+            var markerarry= [];
+
+            Earth.prototype = Object.create(THREE.Object3D.prototype);
+
+            Earth.prototype.createMarker = function(lat, lon) {
+                var marker = new Marker();
+
+                var latRad = lat * (Math.PI / 180);
+                var lonRad = -lon * (Math.PI / 180);
+                var r = this.userData.radius;
+
+                // marker.position.set(Math.cos(latRad) * Math.cos(lonRad) * r, Math.sin(latRad) * r, Math.cos(latRad) * Math.sin(lonRad) * r);
+                marker.position.set(Math.cos(latRad) * Math.cos(lonRad) * r, Math.sin(latRad) * r, Math.cos(latRad) * Math.sin(lonRad) * r);
+                marker.rotation.set(0.0, -lonRad, latRad - Math.PI * 0.5);
+
+                this.add(marker);
+            };
+
+
+
+            // ------ Cloud object -------------------------------------------------
+            function CloudMesh(radius, canvasCloud){
+                THREE.Object3D.call(this);
+
+                this.userData.radius = radius;
+
+                var cloudMesh = new THREE.Mesh(
+                    new THREE.SphereGeometry(radius, 64.0, 48.0),
+                    new THREE.MeshPhongMaterial({
+                        map: new THREE.Texture(canvasCloud),
+                        side: THREE.DoubleSide,
+                        opacity: 0.8,
+                        transparent: true,
+                        depthWrite: false
+                    })
+                );
+
+                this.add(cloudMesh);
+            }
+
+            CloudMesh.prototype = Object.create(THREE.Object3D.prototype);
+
+
+
+            // ------ Three.js code ------------------------------------------------
+
+            var scene, camera, renderer, label;
+            // var backgroundScene, backgroundCamera;
+            var controls;
+            var tilt = Math.PI / 7.735;
+
+            var direcitonal;
+
+
+            var fov , zoom = 1.0, inc = -0.005;
+
+            var translate_x = 50;
+            var translate_inc = 1.0;
+
+            let loop = true;
+
+            // var tilt = 0;
+
+
+            init();
+
+            function init() {
+
+                // for(let i = 0; i < 240; i++){
+                //     fetch(`regions/region_${i}.txt`)
+                //     .then(response => response.text())
+                //     .then(content => {
+                //         // Do something with your data
+                //         // console.log(data);
+                //         // if(i == 210){
+                //         //     console.log("Brazil here ", content);
+                //         // }
+
+                //         document.getElementById("g-map").innerHTML += content; 
+                //     });
+                // }
+
+
+                fetch("world/world.txt")
+                .then(response => response.text())
+                .then(content =>{
+                    document.getElementById("g-map").innerHTML += content;
+                });
+
+
+                scene = new THREE.Scene();
+
+                const loader = new THREE.TextureLoader();
+                // loader.load('https://images.pexels.com/photos/1205301/pexels-photo-1205301.jpeg' , function(texture)
+                // {
+                //     scene.background = texture;  
+                // });
+
+
+                // loader.load('https://images.pexels.com/photos/1694000/pexels-photo-1694000.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' , function(texture)
+                // {
+                //     scene.background = texture;  
+                // });
+
+
+                loader.load('/images/background.png' , function(texture)
+                {
+                    scene.background = texture;  
+                });
+
+
+
+
+                camera = new THREE.PerspectiveCamera(45, 4 / 3, 0.1, 100);
+                // camera.position.set(0.0, 1.6, 2.9);
+                camera.position.set(0.0, 1.6, 38.2);
+                // camera.position.set(0.0, 1.6, 3.0);
+                camera.rotation.order = 'YXZ'; 
+                fov = camera.fov;
+
+                // camera.rotation.order = 'YZ'; 
+                // camera.lookAt(14,14,0);
+
+                // camera.position.z = 25;
+                var canvReference = document.getElementById("my_canvas");
+
+                renderer = new THREE.WebGLRenderer({
+                    antialias: true,
+                    canvas: canvReference
+                });
+
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.autoRotate = true;
+                controls.autoRotateSpeed =-1.5;
+                controls.enablePan = false;
+                controls.enableRotate = false;
+
+
+                var ambient = new THREE.AmbientLight(0xffffff, 0.5);
+                scene.add(ambient);
+
+                direcitonal = new THREE.DirectionalLight(0xffffff, 0.7);
+                direcitonal.position.set(5.0, 2.0, 5.0).normalize();
+                // direcitonal.position.set(5.0, 2.0, 7.0).normalize();
+                scene.add(direcitonal);
+
+                // just some code for the loading
+                var manager = createLoader(renderer.domElement, animate);
+
+                var texLoader = new THREE.TextureLoader(manager).setCrossOrigin(true);
+
+
+                // var texLoader = new THREE.TextureLoader().setCrossOrigin(true);
+
+                // var texture = texLoader.load('https://s3-eu-west-2.amazonaws.com/bckld/lab/textures/earth_latlon.jpg');
+                var texture = texLoader.load('/images/earth_material.png');
+                texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+                var bumpMap = new THREE.ImageUtils.loadTexture('http://learningthreejs.com/data/2013-09-16-how-to-make-the-earth-in-webgl/demo/bower_components/threex.planets/images/earthbump1k.jpg');
+                var bumpScale = 0.05;
+
+                var specularMap = new THREE.ImageUtils.loadTexture('http://learningthreejs.com/data/2013-09-16-how-to-make-the-earth-in-webgl/demo/bower_components/threex.planets/images/earthspec1k.jpg');
+                var specular = new THREE.Color('grey');
+
+
+                var earth = new Earth(1.0, texture, bumpMap, bumpScale, specularMap, specular);
+
+                
+                // create cloud
+                var canvasCloud = texLoader.load('http://learningthreejs.com/data/2013-09-16-how-to-make-the-earth-in-webgl/demo/bower_components/threex.planets/images/earthcloudmap.jpg');
+                var cloudMesh = new CloudMesh(1.0, canvasCloud);
+
+                earth.add(cloudMesh);
+
+
+
+                // earth.createMarker(48.856700, 2.350800); // Paris
+                // earth.createMarker(51.507222, -0.1275); // London
+                // earth.createMarker(34.050000, -118.250000); // LA
+                // earth.createMarker(41.836944, -87.684722); // Chicago
+                // earth.createMarker(35.683333, 139.683333); // Tokyo
+                // earth.createMarker(33.333333, 44.383333); // Baghdad
+                // earth.createMarker(40.712700, -74.005900); // New York
+
+                // earth.createMarker(55.750000, 37.616667); // Moscow
+                // earth.createMarker(35.117500, -89.971111); // Memphis
+                // earth.createMarker(-33.925278, 18.423889); // Cape Town
+                // earth.createMarker(32.775833, -96.796667); // Dallas
+                // earth.createMarker(52.366667, 4.900000); // Amsterdam
+                // earth.createMarker(42.358056, -71.063611); // Boston
+                // earth.createMarker(52.507222, 13.145833); // Berlin
+
+                // // earth.createMarker(37.783333, -122.416667); // San Francisco
+                // earth.createMarker(21.0218081,105.8556643); // Lê Thánh Tông, Hoàn Kiếm
+
+
+
+                scene.add(earth);
+
+
+
+
+                //---------------------------
+                // background 
+                // create the geometry sphere
+                // var backgroundGeometry  = new THREE.SphereGeometry(0.5, 64, 48);
+                // // create the material, using a texture of startfield
+                // var backgroundMaterial  = new THREE.MeshBasicMaterial()
+                // backgroundMaterial.map   = THREE.ImageUtils.loadTexture('http://learningthreejs.com/data/2013-09-16-how-to-make-the-earth-in-webgl/screenshots/galaxy_starfield.png')
+                // backgroundMaterial.side  = THREE.BackSide
+                // // create the mesh based on geometry and material
+                // var background = new THREE.Mesh(backgroundGeometry, backgroundMaterial)
+
+
+                // Load the background texture
+                // var texture = THREE.ImageUtils.loadTexture('https://cosmosmagazine.com/wp-content/uploads/2020/10/200429_quasar_the-universe_energy.jpg');
+                // var backgroundMesh = new THREE.Mesh(
+                //     new THREE.PlaneGeometry(50,50),
+                //     new THREE.MeshBasicMaterial({
+                //         map: texture
+                //     }));
+
+                // backgroundMesh.material.depthTest = false;
+                // backgroundMesh.material.depthWrite = false;
+
+                // Create your background scene
+                // backgroundScene = new THREE.Scene();
+                // backgroundCamera = new THREE.Camera();
+                // backgroundScene.add(backgroundCamera);
+                // backgroundScene.add(backgroundMesh);
+
+
+
+                // scene.add(background);
+
+                //-------------
+                // globe
+
+                var radius1 = 1;
+
+                //var sphere1 = new THREE.Mesh(new THREE.SphereGeometry(radius1, 16, 16));
+                // scene.add( sphere1 );
+
+                // var city = {
+                //     "name": "Nader Hany",
+                //     "lat": 30,
+                //     "lng": 30
+                // };
+
+                // var label = new InfoBox(city, radius1, document.body);
+                // var material1 = new THREE.MeshPhongMaterial({
+                //     color: 0xDC143C
+                // });
+
+                // var marker1 = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 16), material1);
+                // marker1.userData = {
+                //     URL: "http://stackoverflow.com"
+                // };
+
+                // marker1.position.copy(label.position);
+                // // scene.add(marker1);
+                // earth.add(marker1);
+
+                // var city2 = {
+                //     "name": "Nader Hany",
+                //     "lat": 40,
+                //     "lng": 40
+                // };
+                // var label2 = new InfoBox(city2, radius1, document.body);
+                // var geometry2 = new THREE.SphereGeometry(0.05, 16, 16);
+                // var material2 = new THREE.MeshPhongMaterial({
+                //     map: THREE.ImageUtils.loadTexture('https://upload.wikimedia.org/wikipedia/commons/4/40/Egyptian_Revolution_Flag_%281952-1958%29.jpg', THREE.SphericalRefractionMapping)
+                // });
+                // var marker2 = new THREE.Mesh(geometry2, material2);
+
+                // marker2.userData = {
+                //     URL: "http://stackoverflow.com"
+                // };
+                // marker2.position.copy(label2.position);
+                // // scene.add(marker2);
+                // earth.add(marker2);
+
+
+                // // push marker into array
+                // markerarry.push(marker1)
+                // markerarry.push(marker2)
+
+                //----------------
+                window.onmousedown = function( event ) 
+                {
+                // the following line would stop any other event handler from firing
+                // (such as the mouse's TrackballControls)
+                // event.preventDefault();
+                
+                    const rect = renderer.domElement.getBoundingClientRect();
+                    const left = event.clientX - rect.left;
+                    const top = event.clientY - rect.top;
+
+                    const x = (left / rect.width) * 2 - 1;
+                    const y = - (top / rect.height) * 2 + 1;
+                    
+                    const raycaster = new THREE.Raycaster();
+                    raycaster.ray.origin.setFromMatrixPosition(camera.matrixWorld);
+                    raycaster.ray.direction.set(x, y, 0.5).unproject(camera).sub(raycaster.ray.origin).normalize();
+                    
+                    const intersects = raycaster.intersectObjects(markerarry, true);
+                    // console.log(intersects);
+
+                }
+                //-----------------------
+
+                window.addEventListener('resize', onResize);
+                onResize();
+
+                document.body.appendChild(renderer.domElement);
+
+            }
+
+            function onResize() {
+                var offsetHeight = document.getElementById('canvasWrapper').offsetHeight*0.69;
+                var canvasWidth = window.innerWidth*0.95;
+                // camera.aspect = window.innerWidth / window.innerHeight;
+                // camera.aspect = window.innerWidth / (window.innerHeight*0.8);
+                // camera.aspect = window.innerWidth / 700;
+                camera.aspect = canvasWidth / offsetHeight;
+
+                camera.updateProjectionMatrix();
+
+                // renderer.setSize(window.innerWidth, window.innerHeight);
+                // renderer.setSize(window.innerWidth, window.innerHeight*0.8);
+                // renderer.setSize(window.innerWidth, 700);
+                renderer.setSize(canvasWidth, offsetHeight);
+            }
+
+            function animate() {
+                //  label.update();
+
+                requestAnimationFrame(animate);
+
+                // direcitonal.position.x = -  Math.sin(Date.now() / 240);
+                // direcitonal.position.z =  Math.cos(Date.now() / 240);
+
+                // direcitonal.rotation.z = tilt;
+
+                controls.update();
+
+
+                if(zoom >= 0.08){
+                    camera.fov = fov * zoom;
+                    camera.updateProjectionMatrix();
+                    
+                    zoom += inc;
+                    // console.log("debug zoom", zoom);
+
+                    // document.getElementById("my_canvas").classList.add('divHide');
+                }
+                else{
+
+                    if(loop){
+                        loop = false;
+                        // let jsonData;
+                        fetch("data/pollutions.json")
+                        .then(response => response.json())
+                        .then(content =>{
+                            // jsonData = JSON.parse(content);
+                            // console.log(content.pollution_list);
+                            let pollution_list = content.pollution_list
+                            for(let ele of pollution_list){
+                                document.getElementById("CategoryListId").innerHTML+=`<div class = "category-block">${ele}</div>`
+                            }
+                        });
+
+                        // console.log("test data", jsonData);
+
+                        document.getElementById("CategoryListId").classList.add('divShow');
+                        document.getElementById("my_canvas").classList.add('divHide');
+                        document.getElementById("myMap").classList.add('divShow');
+                        document.getElementById("mapCoverId").classList.add('coverShow');
+                        document.getElementById("CategoryButtonId").classList.add('divShow');
+                        // document.getElementById("CategoryListId").classList.add('blockShow');
+                        document.getElementById("choropleth-map-svg").classList.add("svg-transition");
+                        document.getElementById("pollution-button-id").classList.add("categoryButtonClicked");
+
+                    }
+                    
+
+                    // if(translate_x <=310){
+                    //     translate_x*=translate_inc;
+                    //     translate_inc+=0.02;
+                    //     document.getElementById("g-map").transform.baseVal.getItem(0).setTranslate(translate_x, 35);
+                    // }
+
+
+                    // console.log("done");
+                    // document.getElementById("my_canvas").classList.add('box-transition');
+                    // document.getElementById("my_canvas").classList.add('box-hidden');
+                    
+                }
+                
+
+                // document.getElementById("g-map").transform = "translate(300, 35)";
+
+
+                camera.rotation.z = tilt; 
+                direcitonal.position.copy(camera.position);
+
+                // camera.rotation.y = tilt; 
+                
+                // renderer.render(backgroundScene, backgroundCamera);
+                renderer.render(scene, camera);
+            }
+        </script>
+
+
+        <script>
+            function handleRegion(element, pos){
+                // console.log("onmouse");
+
+                var x = pos.clientX + 30;
+                if(x >= 1300){
+                    x -= 100;
+                }
+
+                var y = pos.clientY + 30;
+
+                // console.log("debug x", x);
+                // console.log("debug y", y);
+
+                regionContent = element.getAttribute("name");
+
+                // console.log("check name ", element.getAttribute("name"));
+
+
+                element.classList.add('highlighted');
+                // document.getElementById(id).classList.add('highlighted');
+                cursor="Your Mouse Position Is : " + x + " and " + y ;
+                document.getElementById("regionDetail").style.display = 'block';
+                document.getElementById("regionDetail").innerHTML= regionContent;
+                document.getElementById("regionDetail").style.left =  x + 'px';
+                document.getElementById("regionDetail").style.top =  y + 'px';
+            }
+
+            function handleRegionMouseOut(element){
+                element.classList.remove("highlighted");
+                document.getElementById("regionDetail").style.display = 'none';
+                document.getElementById("regionDetail").innerHTML="";
+            }
+
+
+
+
+            function handleButtonHover(element){
+                element.classList.add("categoryButtonHover");
+            }
+
+            function handleButtonLeave(element){
+                element.classList.remove("categoryButtonHover");
+            }
+
+            // console.log("done");
+
+            function handleButtonClick(id){
+                document.getElementById("CategoryListId").classList.remove('divShow');
+
+                if(id == "pollution-button-id"){
+                    fetch("data/pollutions.json")
+                    .then(response => response.json())
+                    .then(content =>{
+                        // jsonData = JSON.parse(content);
+                        // console.log(content.pollution_list);
+                        let pollution_list = content.pollution_list;
+                        document.getElementById("CategoryListId").innerHTML = "";
+                        for(let ele of pollution_list){
+                            document.getElementById("CategoryListId").innerHTML+=`<div class = "category-block">${ele}</div>`
+                        }
+                    });
+
+                    document.getElementById("pollution-button-id").classList.add("categoryButtonClicked");
+                    document.getElementById("disaster-button-id").classList.remove("categoryButtonClicked");
+                }
+                else{
+                    fetch("data/disasters.json")
+                    .then(response => response.json())
+                    .then(content =>{
+                        // jsonData = JSON.parse(content);
+                        // console.log(content.pollution_list);
+                        let disaster_list = content.disaster_list;
+
+                        console.log("test list ", disaster_list);
+
+                        document.getElementById("CategoryListId").innerHTML = "";
+                        for(let ele of disaster_list){
+                            console.log("check ele ", ele);
+                            let file = ele[1];
+                            console.log(file);
+                            document.getElementById("CategoryListId").innerHTML+=`<div class = "category-block" 
+                                                                                       onmouseover = "showCountry('${file}')"
+                                                                                       onmouseout = "hideCountry('${file}')">${ele[0]}</div>`
+                        }
+                    });
+
+                    document.getElementById("pollution-button-id").classList.remove("categoryButtonClicked");
+                    document.getElementById("disaster-button-id").classList.add("categoryButtonClicked");
+                }
+
+                document.getElementById("CategoryListId").classList.add('divShow');
+            }
+
+
+            function showCountry(file){
+                // console.log("test file", file);
+                fetch(`data/${file}.json`)
+                    .then(response => response.json())
+                    .then(content =>{
+                        // jsonData = JSON.parse(content);
+                        // console.log(content.pollution_list);
+                        let country_dict = content;
+
+                        // console.log("test list ", country_dict);
+                        
+                        for(let name in country_dict){
+                            // console.log("test file name",file);
+                            if(document.querySelectorAll(`[name='${name}']`)[0] !== undefined){
+                                // console.log("hien thi ten",file.toString());
+
+                                document.querySelectorAll(`[name='${name}']`)[0].classList.add(`${file}-highlighted`);
+
+                                // if(file.toString() === "flood"){
+                                //     document.querySelectorAll(`[name='${name}']`)[0].classList.add('flood-highlighted');
+                                // }
+                                // else{
+                                //     document.querySelectorAll(`[name='${name}']`)[0].classList.add('highlighted');
+                                // }
+                            }
+                            else{
+                                console.log("no name", name);
+                            }
+                        }
+                    });
+            }
+
+
+
+            function hideCountry(file){
+                // console.log("test file", file);
+                fetch(`data/${file}.json`)
+                    .then(response => response.json())
+                    .then(content =>{
+                        // jsonData = JSON.parse(content);
+                        // console.log(content.pollution_list);
+                        let country_dict = content;
+
+                        // console.log("test list ", country_dict);
+                        
+                        for(let name in country_dict){
+                            // console.log(name);
+                            if(document.querySelectorAll(`[name='${name}']`)[0] !== undefined){
+                                // console.log("hien thi ten",file.toString());
+
+                                document.querySelectorAll(`[name='${name}']`)[0].classList.remove(`${file}-highlighted`);
+
+                                // if(file.toString() === "flood"){
+                                //     document.querySelectorAll(`[name='${name}']`)[0].classList.add('flood-highlighted');
+                                // }
+                                // else{
+                                //     document.querySelectorAll(`[name='${name}']`)[0].classList.add('highlighted');
+                                // }
+                            }
+                            else{
+                                console.log("no name", name);
+                            }
+                        }
+                    });
+            }
+
+
+
+
+            function moveToAction(){
+                window.location.href = "/action.html";
+            }
+        </script>
+
+
+        <script>
+            var d = new Date();
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+            console.log(curr_date + "-" + curr_month + "-" + curr_year);
+
+            document.getElementById("dateId").innerHTML = `${curr_date}/${curr_month}/${curr_year}`;
+            document.getElementById("myDate").value = `${curr_year}-${curr_month}-${curr_date}`;
+
+
+
+
+            function handleDateChange(){
+                var x = document.getElementById("myDate").value;
+                var x_comp = x.split("-");
+                
+                document.getElementById("dateId").innerHTML = `${x_comp[2]}/${x_comp[1]}/${x_comp[0]}`;
+            }
+        </script>
+
+        <!-- <div class="new"></div> -->
+
+	</body>
+</html>

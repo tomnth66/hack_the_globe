@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Action</title>
+        <link rel="stylesheet" href="/styles.css">
+    </head>
+    <body>
+        <div class = "loading" id = "loadingId">
+            <div class = "loading-container">
+                <img src = "/images/eye-brown.png" class = "outer">
+                <img src = "/images/eye.png" class = "inner">
+            </div>
+        </div>
+
+        <div id = "action-container-id" class = "action-container">
+            <div class = "col-navbar">
+                <div class = "col-navbar-menu" style = "background: #B9FC95;">
+                </div>
+
+                <div class = "col-navbar-item" style = "background: #B9FC95;">
+                </div>
+
+                <div class = "col-navbar-item" style = "background: green;">
+                </div>
+
+                <div class = "col-navbar-item" style = "background: blue;">
+                </div>
+
+                <div class = "col-navbar-item" style = "background: yellow;">
+                </div>
+            </div>
+
+            <div class = "show-display" id = "showDisplayId">
+                <div class = "item-title" style = "background: #B9FC95;">
+
+                </div>
+                
+                <div class = "item-category" style = "background: yellow;">
+
+                </div>
+
+                <div class = "item-category" style = "background: purple;">
+                
+                </div>
+
+                <div class = "item-category" style = "background: blue;">
+                
+                </div>
+
+                <div class = "item-category" style = "background: pink;">
+                
+                </div>
+            </div>
+        </div>
+
+        <script>
+            setTimeout(function() {
+                document.getElementById("loadingId").classList.add('divHide');
+                document.getElementById("action-container-id").classList.add("divShow");
+                console.log("after 3500");
+            },2000);
+
+            var target = document.getElementById("showDisplayId");
+            var acc = 0;
+            var speed = 100;
+
+            window.addEventListener('wheel', function(event) {
+                console.log("scrolling");
+                // event.preventDefault();
+
+                target.scrollBy({
+                    left: event.deltaY*17.87,    
+                    behavior: 'smooth'
+                })
+
+                // if(e.deltaY > 0){
+                //     item.scrollLeft += speed;
+                // } 
+                // else{
+                //     item.scrollLeft -= speed;
+                // }
+                // speed += acc;
+            });
+        </script>
+    </body>
+</html>
