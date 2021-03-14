@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="">
     <head>
@@ -25,7 +24,13 @@
                 <div class = "col-navbar-item" style = "background: #B9FC95;">
                 </div>
 
-                <div class = "col-navbar-item" style = "background: green;">
+                <div class = "col-navbar-item" style = "background: #7AD7EC;">
+                </div>
+
+                <div class = "col-navbar-item" style = "background: #97FDDE;">
+                </div>
+
+                <div class = "col-navbar-item" style = "background: #FF8585;">
                 </div>
             </div>
 
@@ -37,17 +42,55 @@
                     </div>
                 </div>
                 
-                <div class = "imgClass">
-                    <img src = "/images/layer-1-1.png">
+                <div class = "item-1">
+                    <img class = "imgClass-1" src = "/images/layer-1-1.png">
+                    <img class = "imgClass-2" src = "/images/veg100.png">
+
+                    <div class = "item-1-title-text">
+                        <img src = "/images/green_food.png">
+                    </div>
+
+                    <div class = "item-1-img-1">
+                        <img src = "/images/hamburger.png">
+                    </div>
+
+                    <div class = "item-1-title-1">
+                        <span>Delicious meal and protect the environment!  Why not?</span>
+                    </div>
+
+                    <div class = "item-1-img-2">
+                        <img src = "/images/organic-food-1.png">
+                    </div>
+
+                    <div class = "item-1-title-2">
+                        <span>Top 10 organic store in Vietnam</span>
+                    </div>
+
+                    <div class = "item-1-title-3">
+                        <span>Delicious meal and protect the environment!  Why not?</span>
+                    </div>
+
                 </div>
 
-                <div class = "img1Class">
-                    <img src = "/images/veg100.png">
+
+                <div class = "item-2">
+
                 </div>
 
-                <div class = "item-category" style = "background: purple;"></div>
-
-                <div class = "item-category" style = "background: blue;"></div>
+                <div class = "item-3">
+                    <div class = "item-3-title-1">
+                        <span>Green Fashion</span>
+                    </div>
+                    <div class = "item-3-title-2">
+                        <span>Green Beauty</span>
+                    </div>
+                    <div class = "item-3-title-3">
+                        <span>Green Household</span>
+                    </div>
+                    <div class = "item-3-title-4">
+                        <span>Green tech</span>
+                    </div>
+                </div>
             </div>
 
 
@@ -59,27 +102,15 @@
             setTimeout(function() {
                 document.getElementById("loadingId").classList.add('divHide');
                 document.getElementById("action-container-id").classList.add("divShow");
-                console.log("after 3500");
             },2000);
 
             var target = document.getElementById("showDisplayId");
 
             window.addEventListener('wheel', function(event) {
-                console.log("scrolling");
-                // event.preventDefault();
-
                 target.scrollBy({
                     left: event.deltaY*17.87,    
                     behavior: 'smooth'
                 })
-
-                // if(e.deltaY > 0){
-                //     item.scrollLeft += speed;
-                // } 
-                // else{
-                //     item.scrollLeft -= speed;
-                // }
-                // speed += acc;
             });
         </script>
     </body>
